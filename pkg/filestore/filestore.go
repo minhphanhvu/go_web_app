@@ -25,7 +25,7 @@ func Init(dataFilePath string) error {
 		}
 	}
 
-	FileStoreConfig.Fs = fileStore{Mu: &sync.Mutex{}, Store: make(map[string]string)}
+	FileStoreConfig.Fs = fileStore{Mu: sync.Mutex{}, Store: make(map[string]string)}
 	FileStoreConfig.DataFilePath = dataFilePath
 	return nil
 }
