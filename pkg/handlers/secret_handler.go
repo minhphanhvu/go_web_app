@@ -6,9 +6,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"crypto/md5"
+	"strings"
+
 	"github.com/minhphanhvu/go_web_app/pkg/filestore"
 	"github.com/minhphanhvu/go_web_app/pkg/types"
-	"strings"
 )
 
 type Secret struct {

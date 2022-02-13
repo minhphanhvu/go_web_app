@@ -3,10 +3,11 @@ package filestore
 import (
 	"os"
 	"sync"
-	"github.com/minhphanhvu/go_web_app/pkg/types"
 	"io"
 	"log"
 	"encoding/json"
+
+	"github.com/minhphanhvu/go_web_app/pkg/types"
 )
 
 type fileStore struct {
