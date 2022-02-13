@@ -47,6 +47,22 @@ func (fileStore *fileStore) Write(data types.SecretData) error {
 	return fileStore.WriteToFile()
 }
 
+func (fileStore *fileStore) Read(id string) (string, error) {
+	fileStore.Mu.Lock()
+	defer fileStore.Mu.Unlock()
+
+	err := fileStore.ReadFromFile()
+	if err != nil {
+		return "", err
+	}
+
+	data := fileStore.Store[id]
+	delete(fileStore.Store, id)
+	fileStore.WriteToFile()
+
+	return data, nil
+}
+
 func (fileStore *fileStore) ReadFromFile() error {
 	file, err := os.Open(FileStoreConfig.DataFilePath)
 	if err != nil {
