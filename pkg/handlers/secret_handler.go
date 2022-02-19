@@ -45,6 +45,11 @@ func createSecret(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	defer r.Body.Close()
+	if len(s.PlainText) == 0 {
+		http.Error(w, "Invalid Request", http.StatusBadRequest)
+		return
+	}
+
 	hashDigest := getHash(s.PlainText)
 	secretResponse := SecretResponse{Id: hashDigest}
 
