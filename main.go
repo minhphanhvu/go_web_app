@@ -17,7 +17,17 @@ func main() {
 		log.Fatal("Please specify the PATH")
 		os.Exit(1)
 	}
-	filestore.Init(DATA_FILE_PATH)
+	PASSWORD := os.Getenv("PASSWORD")
+	if len(PASSWORD) == 0 {
+		log.Fatal("Please specify the PASSWORD for encryption/decryption")
+		os.Exit(1)
+	}
+	SALT := os.Getenv("SALT")
+	if len(SALT) == 0 {
+		log.Fatal("Please specify the SALT for encryption/decryption")
+		os.Exit(1)
+	}
+	filestore.Init(DATA_FILE_PATH, PASSWORD, SALT)
 
 	err := http.ListenAndServe(":8080", mux)
 	// if server not successfully, terminal will log message
